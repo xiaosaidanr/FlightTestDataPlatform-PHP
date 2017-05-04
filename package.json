@@ -6,13 +6,31 @@
   },
   "devDependencies": {
     "bootstrap-sass": "^3.3.7",
+    "css-loader": "^0.28.0",
     "gulp": "^3.9.1",
     "jquery": "^3.1.0",
     "laravel-elixir": "^6.0.0-14",
     "laravel-elixir-vue-2": "^0.2.0",
     "laravel-elixir-webpack-official": "^1.0.2",
     "lodash": "^4.16.2",
+    "style-loader": "^0.16.1",
     "vue": "^2.0.1",
     "vue-resource": "^1.0.3"
+  },
+  "dependencies": {
+    "bootbox": "^4.4.0",
+    "highcharts": "^5.0.10",
+    "js-cookie": "^2.1.4",
+    "vue-amap": "^0.1.6",
+    "vue-datepicker": "^1.3.0",
+    "vue-grid-layout": "^2.1.6",
+    "vue-highcharts": "0.0.9",
+    "vue-loading-spinner": "^1.0.7",
+    "vue-resource": "^1.2.0",
+    "vue-router": "^2.2.1",
+    "vue-spinner": "^1.0.2",
+    "vue2-animate": "^1.0.4",
+    "vuedraggable": "^2.10.0",
+    "vuex": "^2.3.1"
   }
 }

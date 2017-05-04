@@ -17,6 +17,10 @@ require('bootstrap-sass');
  */
 
 window.Vue = require('vue');
+
+Vue.config.debug = true;
+Vue.config.devtools = true;
+
 require('vue-resource');
 
 /**
@@ -29,6 +33,13 @@ Vue.http.interceptors.push((request, next) => {
     request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
 
     next();
+});
+
+Vue.http.interceptors.push((request, next) => {
+    window.app.loading = true;
+    next(()=> {
+    window.app.loading = false;
+    });
 });
 
 /**
