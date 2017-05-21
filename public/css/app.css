@@ -7760,9 +7760,15 @@ body {
   }
 }
 
+/*
 .container {
-  width: 90%;
-  margin: auto;
+    width: 90%;
+    margin: auto;
+}
+*/
+.container {
+  width: 100%;
+  margin: 0px;
 }
 
 html,

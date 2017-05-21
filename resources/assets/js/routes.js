@@ -23,7 +23,7 @@ const routes = [
 	}
 },
 {
-	path: '/config',
+	path: '/config*',
 	components: {
 		default: config,
 		// header: header,

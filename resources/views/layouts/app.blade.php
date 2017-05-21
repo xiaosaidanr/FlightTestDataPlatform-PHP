@@ -13,6 +13,12 @@
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
 
+    <script>
+        window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+            ]); ?>;
+    </script>
+
 </head>
 <body>
     <div id="app">
@@ -41,13 +47,13 @@
                         <!-- Left Side Of Navbar -->
                         @if (!Auth::guest())
                         <ul class="nav navbar-nav">
-                            <li>
+<!--                             <li>
                                 <router-link to="/custom_data">定制数据</router-link>
-                            </li>
+                            </li> -->
                             <li>
                                 <router-link to="/raw_data">遥测数据</router-link>
                             </li>
-                            <li>
+<!--                             <li>
                                 <router-link to="/chart">数据曲线</router-link>
                             </li>                            
                             <li>
@@ -55,9 +61,6 @@
                             </li>
                             <li>
                                 <router-link to="/test">测试</router-link>
-                            </li>
-<!--                             <li v-if="isAdmin()">
-                                <router-link to="/apply_audit">权限审核</router-link>
                             </li> -->
                         </ul>
                         @endif

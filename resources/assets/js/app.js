@@ -36,14 +36,28 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        count: 0
+        realtimeData: {}
     },
     mutations: {
-        increment (state){
-            state.count++
-        }
+        // increment (state){
+        //     state.count++
+        // }
     }
 });
+
+function getRealtimeData (isFirstTime){
+    if (!isFirstTime) {
+        isFirstTime = false;
+    }
+    var self = this;
+    $.when(Vue.http.get('/realtime_data'), isFirstTime).then(function (res) {
+        store.state.realtimeData = res.body.realtimeData;
+        // console.log(store.state.realtimeData);
+    });
+}
+
+getRealtimeData(true);
+setInterval(getRealtimeData, 1000);
 
 const router = new VueRouter({
     routes
