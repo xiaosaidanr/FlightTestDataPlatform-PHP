@@ -1,5 +1,4 @@
 <template>
-	<!-- <div class="col-md-2 col-sm-2 data_item" style="padding: 0px;border:1px solid;"> -->
 	<div class="col-md-6 col-sm-6 data_item" style="padding: 0px;">
 		<div class="col-md-7 col-sm-6 data_item_name" style="padding: 0px;">
 			<label style="word-wrap: break-word;">{{ name }}</label>
@@ -9,7 +8,7 @@
 				<button @click="delete_self">删除</button>
 			</template>
 			<template v-else>
-				<label style="word-wrap: break-word;">{{ value_to_show }}</label>
+				<label :style="labelStyle">{{ value_to_show }}</label>
 			</template>
 		</div>
 	</div>
@@ -17,10 +16,13 @@
 <script>
 	import { mapState } from 'vuex'
 	export default{
-		props: ['name', 'idIndex', 'index', 'editing'],
+		props: ['item', 'name', 'idIndex', 'index', 'editing'],
 		data: function(){
 			return {
-				
+				labelStyle: {
+					'word-wrap': 'break-word',
+					color: '',
+				},
 			}
 		},
 		methods: {
@@ -30,19 +32,27 @@
 		},
 		computed: {
 			value_to_show(){
-				var tmp = '';
-				// if (this.name == '拉力幅值1') {
-				// 	console.log(Array.isArray(this.idIndex));
-				// }
+				let tmp = '';
 				if (Array.isArray(this.idIndex)) {
 					for (let i = 0; i < this.idIndex.length; i++) {
-						// console.log(this.realtimeData[this.idIndex[i]]);
-						tmp = tmp + ' ' + this.realtimeData[this.idIndex[i]];
+						tmp = tmp + ' ' + this.realtimeData[this.idIndex[i]]['ResultStr'];
 					}
-					// console.log(tmp);
 				}
 				else{
-					tmp = this.realtimeData[this.idIndex];
+					tmp = this.realtimeData[this.idIndex]['ResultStr'];
+				}
+				if (this.item['min']&&this.item['max']) {
+					let min = this.item['min'];
+					let max = this.item['max'];
+					min = parseFloat(min);
+					max = parseFloat(max);
+					let resultDouble = parseFloat(this.realtimeData[this.idIndex]['ResultStr']);
+					if ( min<resultDouble||max>resultDouble ) {
+						this.labelStyle['color'] = 'red';
+					}
+					else{
+						this.labelStyle['color'] = '';
+					}
 				}
 				return tmp;
 			},

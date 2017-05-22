@@ -24,8 +24,11 @@ class RealtimeDataController extends Controller
 		$json_string = file_get_contents('/var/www/FlightTestDataPlatform-PHP/storage/app/id_index_collection.json');
 		$realtimeData = json_decode($json_string, true);
 		foreach ($realtimeData as $key => $value) {
-			$tmp = Redis::hmget($key, ['ResultStr', 'Unit']);
-			$realtimeData[$key] = $tmp[0].$tmp[1];
+			$tmp = Redis::hmget($key, ['ResultDouble', 'ResultStr', 'Unit']);
+			$realtimeData[$key] = [
+				'ResultDouble'=>$tmp[0],
+				'ResultStr'=>$tmp[1].$tmp[2],
+			];
 		}
 		return compact('realtimeData');
 	}

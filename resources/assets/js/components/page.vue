@@ -1,14 +1,11 @@
 <template>
 	<div class="data_page">
-		<div class = "checkbox">
-			<label><input type = "checkbox" v-model="draggable">Enable drag and drop</label>
-		</div>
 		<grid-layout
 			:layout="innerGroups['layout']"
 			:col-num="12"
 			:row-height="30"
 			:is-draggable="draggable"
-			:is-resizable="true"
+			:is-resizable="draggable"
 			:vertical-compact="true"
 			:margin="[10, 10]"
 			:use-css-transforms="true">
@@ -20,7 +17,7 @@
 					:i="innerGroups['layout'][index].i"
 					@resized="resizedEvent"
 					@moved="movedEvent"
-					style="background: #eee;border: 1px solid black;">
+					style="background: #eee;">
 				<group :name="group['name']" :index="index" :items="group['children']" @innerGroupChanged.capture="onInnerGroupChanged"/>
 			</grid-item>
 		</grid-layout>
@@ -33,7 +30,7 @@
 	var GridLayout = VueGridLayout.GridLayout;
 	var GridItem = VueGridLayout.GridItem;
 	export default{
-		props: ['groups', 'index'],
+		props: ['groups', 'index', 'draggable'],
 		components: {
 			GridLayout,
 			GridItem,
@@ -41,20 +38,17 @@
 		},
 		data: function(){
 			return {
-				draggable: false,
+				// draggable: false,
 				innerGroups: this.groups,
 				innerLayout: this.groups['layout'],
 			}
 		},
 		methods: {
 			onInnerGroupChanged(val) {
-				// alert('event from group');
 				this.innerGroups['children'][val['index']]['children'] = val['value'];
 				this.$emit('innerPageChanged', {'value': this.innerGroups, 'index': this.index});
 			},
 			movedEvent: function(i, newX, newY){
-				// console.log("MOVED i=" + i + ", X=" + newX + ", Y=" + newY);
-				// console.log(this.innerGroups['layout']);
 				this.$emit('layoutChanged', {'layout': this.innerGroups['layout'], 'index': this.index});
 			},
 			/**
@@ -67,8 +61,6 @@
 			* 
 			*/
 			resizedEvent: function(i, newH, newW, newHPx, newWPx){
-				// console.log("RESIZED i=" + i + ", H=" + newH + ", W=" + newW + ", H(px)=" + newHPx + ", W(px)=" + newWPx);
-				// console.log(this.innerGroups['layout']);
 				this.$emit('layoutChanged', {'layout': this.innerGroups['layout'], 'index': this.index});
 			},
 		},
@@ -77,7 +69,6 @@
 				this.innerGroups = val;
 			},
 			innerGroups(val) {
-				// alert('here');
 				this.$emit('innerPageChanged', {'value': val, 'index': this.index});
 			},
 		},

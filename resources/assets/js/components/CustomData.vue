@@ -1,6 +1,6 @@
 <template>
     <div>
-        <label>CustomData</label>
+        <label>Under Construction</label>
     </div>
 </template>
 <script>

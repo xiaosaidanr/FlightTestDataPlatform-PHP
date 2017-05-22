@@ -1,6 +1,6 @@
 <template>
     <div>
-        <label>Chart</label>
+        <label>Under Construction</label>
     </div>
 </template>
 <script>

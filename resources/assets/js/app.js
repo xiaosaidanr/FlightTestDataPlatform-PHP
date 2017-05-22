@@ -39,10 +39,7 @@ const store = new Vuex.Store({
         realtimeData: {}
     },
     mutations: {
-        // increment (state){
-        //     state.count++
-        // }
-    }
+    },
 });
 
 function getRealtimeData (isFirstTime){
@@ -52,7 +49,6 @@ function getRealtimeData (isFirstTime){
     var self = this;
     $.when(Vue.http.get('/realtime_data'), isFirstTime).then(function (res) {
         store.state.realtimeData = res.body.realtimeData;
-        // console.log(store.state.realtimeData);
     });
 }
 
