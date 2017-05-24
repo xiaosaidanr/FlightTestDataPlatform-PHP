@@ -7857,4 +7857,15 @@ body {
   color: red;
 }
 
+.menu {
+  width: 100%;
+  z-index: 100;
+}
+
+.menuFixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
 /*# sourceMappingURL=app.css.map */

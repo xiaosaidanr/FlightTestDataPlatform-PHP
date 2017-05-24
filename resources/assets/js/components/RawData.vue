@@ -1,11 +1,18 @@
 <template>
-	<div class="">
-        <ul class="nav nav-tabs">
+	<div id="menu_wrap">
+        <div class="menu">
+            <ul class="nav nav-tabs">
+                <li v-for="frame, index in option['children']" :class="(index==0)?'active':''">
+                    <a :href="'#'+frame['id_index']" data-toggle="tab">{{ frame['name'] }}</a>
+                </li>
+            </ul>
+        </div>
+<!--         <ul class="nav nav-tabs">
             <li v-for="frame, index in option['children']" :class="(index==0)?'active':''">
                 <a :href="'#'+frame['id_index']" data-toggle="tab">{{ frame['name'] }}</a>
             </li>
-        </ul>
-        <label><input type = "checkbox" v-model="draggable">开启</label>
+        </ul> -->
+        <label><input type = "checkbox" v-model="draggable">解锁页面</label>
         <button class="btn btn-primary" @click="saveConfig" style="float: right">保存页面配置</button>
         <div class="tab-content">
             <div v-for="frame, index in option['children']" :class="'tab-pane '+((index==0)?'active':'')" :id="frame['id_index']">
@@ -16,6 +23,16 @@
 </template>
 <script>
     import page from '../components/page.vue'
+    var sssss = require('jquery');
+    sssss(window).scroll(function(){
+        var menu_top = $('#menu_wrap').offset().top;
+        if (sssss(window).scrollTop()>=menu_top) {
+            sssss('.menu').addClass('menuFixed');
+        }
+        else{
+            sssss('.menu').removeClass('menuFixed');
+        }
+    })
 	export default{
 		data: function(){
 			return {

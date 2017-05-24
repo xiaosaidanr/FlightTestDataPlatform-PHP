@@ -55,6 +55,7 @@ function getRealtimeData (isFirstTime){
 getRealtimeData(true);
 setInterval(getRealtimeData, 1000);
 
+
 const router = new VueRouter({
     routes
 })
