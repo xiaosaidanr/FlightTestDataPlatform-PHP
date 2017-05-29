@@ -52,9 +52,6 @@
 						return '';
 					}
 					tmp = this.realtimeData[this.idIndex]['ResultStr'];
-					if (this.idIndex == 'this.idIndex') {
-						console.log(this.realtimeData[this.idIndex]['ResultStr']);
-					}
 				}
 				if (('min' in this.item)&&('max' in this.item)) {
 					let min = this.item['min'];
