@@ -55,11 +55,17 @@
 						let time_total_ms = parseInt(this.realtimeData[this.idIndex]['ResultStr']);
 						let time_total_s = parseInt(time_total_ms/1000);
 						let time_h = parseInt(time_total_s/3600);
-						let time_h_24 = time_h%24;
+						let time_h_24 = 0;
+
+						if (this.idIndex == 'FP_FLI_CTL_COM_SYS_TIME_0' || this.idIndex == 'FP_COLLECTOR_CTL_COM_SYS_TIME_0') {
+							time_h_24 = time_h%24;
+						}
+						else{
+							time_h_24 = (time_h + 8)%24;
+						}
 						let time_m = parseInt((time_total_s - time_h * 3600)/60);
 						let time_s = time_total_s - time_h * 3600 - time_m * 60;
 						tmp = time_h_24 + ':' + time_m + ':' + time_s;
-						console.log(tmp);
 					}
 					else{
 						tmp = this.realtimeData[this.idIndex]['ResultStr'] + this.realtimeData[this.idIndex]['Unit'];

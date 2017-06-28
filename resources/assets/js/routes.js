@@ -3,6 +3,7 @@ import config from './components/Config.vue'
 import custom_data from './components/CustomData.vue'
 import raw_data from './components/RawData.vue'
 import test from './components/Test.vue'
+import system_info from './components/SystemInfo.vue'
 // import header from './components/Header.vue'
 
 const routes = [
@@ -67,6 +68,18 @@ const routes = [
 	props: {
 		header: {
 			title: '测试'
+		}
+	}
+},
+{
+	path: '/system_info',
+	components: {
+		default: system_info,
+		// header: header,
+	},
+	props: {
+		header: {
+			title: '遥控遥测状态'
 		}
 	}
 },

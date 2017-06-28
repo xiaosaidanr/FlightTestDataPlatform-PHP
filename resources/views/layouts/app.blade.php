@@ -62,6 +62,9 @@
                             <li>
                                 <router-link to="/test">测试</router-link>
                             </li> -->
+                            <li>
+                                <router-link to="/system_info">遥控遥测状态</router-link>
+                            </li>
                         </ul>
                         @endif
 
