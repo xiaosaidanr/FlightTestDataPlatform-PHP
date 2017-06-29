@@ -7,11 +7,6 @@
                 </li>
             </ul>
         </div>
-<!--         <ul class="nav nav-tabs">
-            <li v-for="frame, index in option['children']" :class="(index==0)?'active':''">
-                <a :href="'#'+frame['id_index']" data-toggle="tab">{{ frame['name'] }}</a>
-            </li>
-        </ul> -->
         <label><input type = "checkbox" v-model="draggable">解锁页面</label>
         <button class="btn btn-primary" @click="saveConfig" style="float: right">保存页面配置</button>
         <div class="tab-content">

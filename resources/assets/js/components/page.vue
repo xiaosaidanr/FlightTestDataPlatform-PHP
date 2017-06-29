@@ -38,7 +38,6 @@
 		},
 		data: function(){
 			return {
-				// draggable: false,
 				innerGroups: this.groups,
 				innerLayout: this.groups['layout'],
 			}

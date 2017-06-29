@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<!-- <label>Under Construction</label> -->
 		<table class="table" style="table-layout:fixed">
 			<thead>
 				<tr>
@@ -32,10 +31,6 @@
 		},
 		computed: {
 			message_array(){
-				// let message_item = this.realtimeData['info_message'];
-				// let length = this.inner_message_array.length;
-				// console.log(length);
-				// return this.inner_message_array;
 			},
 			...mapState({
 				realtimeData: state => state.realtimeData,
@@ -46,10 +41,8 @@
 			realtimeData(val){
 				let new_message_item = this.realtimeData['info_message'];
 				let length = this.inner_message_array.length;
-				// console.log(length);
 				if ( length > 0 ) {
 					let old_last_item = this.inner_message_array[length - 1];
-					// console.log(old_last_item);
 					if (old_last_item.id == new_message_item.id) {
 						return;
 					}
@@ -70,21 +63,3 @@
 		}
 	}
 </script>
-
-<!-- <template>
-	<div>
-		<label>Under Construction</label>
-	</div>
-</template>
-<script>
-	export default{
-		data: function(){
-			return {
-
-			}
-		},
-		methods: {
-			
-		}
-	}
-</script> -->

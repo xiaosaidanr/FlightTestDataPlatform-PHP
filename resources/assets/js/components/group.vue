@@ -1,21 +1,6 @@
 <template>
-<!-- 	<div class="data_group" style="padding: 0px;border:1px solid;">
-		<div class="col-md-12 col-sm-12 data_group_name" style="padding: 0px;">
-			<h2 style="word-wrap: break-word;">{{ name }}</h2>
-		</div>
-		<div class="col-md-12 col-sm-12 data_group_value" style="padding: 0px;">
-			<draggable v-model="innerItems" :options="{ group:name }" @start="drag=false" @end="drag=false">
-				<transition-group name="fade" tag="div">
-					<item v-for="item, key in innerItems" :name="item['name']" 
-					:idIndex="item['id_index']" key='item' :editing="editing" @itemDelete.capture="onItemDelete" :index="key"/>
-				</transition-group>
-			</draggable>
-		</div>
-		<button @click="editing = !editing;">{{ button_name }}</button>
-	</div> -->
 	<div class="data_group">
 		<div class="panel panel-default panel-primary" style="margin-bottom: 0px;">
-			<!-- <div class="panel-heading" style="background-color: #3097D1;border-color: #3097D1;"> -->
 			<div class="panel-heading" style="background-color:;border-color:;">
 				<h3 class="panel-title">{{ name }}</h3>
 			</div>
@@ -28,7 +13,6 @@
 				</transition-group>
 			</draggable>
 		</div>
-		<!-- <button @click="editing = !editing;">{{ button_name }}</button> -->
 	</div>
 </template>
 <script>
@@ -62,8 +46,6 @@
 				this.innerItems = val;
 			},
 			innerItems(val) {
-				// if (val!=this.items) {
-				// }
 				this.$emit('innerGroupChanged', {'value': val, 'index': this.index});
 			}
 		}

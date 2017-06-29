@@ -15,15 +15,16 @@ class TestController extends Controller
 
     public function index() {
         $user = Auth::user();
+        $root_path = storage_path().'/app/';
         $file_name = (string)($user->id).'_rawDataConfig.json';
-        $file_directory = '/var/www/FlightTestDataPlatform-PHP/storage/app/'.$file_name;
+        $file_directory = $root_path.$file_name;
         if (file_exists($file_directory)) {
             $json_string = file_get_contents($file_directory);
             $option = json_decode($json_string, true);
             return compact("option");
         }
         else{
-            $json_string = file_get_contents('/var/www/FlightTestDataPlatform-PHP/storage/app/default.json');
+            $json_string = file_get_contents($root_path.'default.json');
             $option = json_decode($json_string, true);
             return compact("option");
         }
@@ -32,9 +33,10 @@ class TestController extends Controller
 
     public function store(Request $request){
         $user = Auth::user();
+        $root_path = storage_path().'/app/';
         $file_name = (string)($user->id).'_rawDataConfig.json';
         echo $file_name;
-        $file_directory = '/var/www/FlightTestDataPlatform-PHP/storage/app/'.$file_name;
+        $file_directory = $root_path.$file_name;
         echo $file_directory;
         $body = $request->all();
         $option = json_encode($body);

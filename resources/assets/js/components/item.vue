@@ -7,7 +7,6 @@
 						  border-radius: .25em;
 						  padding: .2em .6em .3em
 						  font-size: 75%;">{{ name }}</label>
-			<!-- <label style="word-wrap: break-word!important;">{{ name }}</label> -->
 		</div>
 		<div class="col-md-5 col-sm-6 data_item_value" style="padding: 0px;">
 			<template v-if="editing">

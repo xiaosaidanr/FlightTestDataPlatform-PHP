@@ -21,7 +21,8 @@ class RealtimeDataController extends Controller
 
 		// self::$count = self::$count + 1;
 		// $realtimeData = self::$count;
-		$json_string = file_get_contents('/var/www/FlightTestDataPlatform-PHP/storage/app/id_index_collection.json');
+		$root_path = storage_path().'/app/';
+		$json_string = file_get_contents($root_path.'id_index_collection.json');
 		$realtimeData = json_decode($json_string, true);
 		foreach ($realtimeData as $key => $value) {
 			if ($key == 'info_message') {
