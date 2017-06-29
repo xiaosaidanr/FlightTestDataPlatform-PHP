@@ -2,12 +2,17 @@
 	<div class="data_item" v-bind:class="[md, sm]" style="padding: 0px;">
 		<template v-if="name!=''&&idIndex!=''">
 			<div class="col-md-7 col-sm-6 text-center data_item_name" style="padding: 0px;">
-				<label style="word-wrap: break-word;
+<!-- 				<label style="word-wrap: break-word;
 							  background-color: #8eb4cb;
 							  color: #fff;
 							  border-radius: .25em;
 							  padding: .2em .6em .3em
-							  font-size: 75%;">{{ name }}</label>
+							  font-size: 75%;">{{ name }}</label> -->
+				<label style="word-wrap: break-word;
+						  background-color: #8eb4cb;
+						  color: #fff;
+						  border-radius: .25em;
+						  padding: 0px .3em 0px">{{ name }}</label>
 			</div>
 			<div class="col-md-5 col-sm-6 text-center data_item_value" style="padding: 0px;">
 				<template v-if="editing">
@@ -25,18 +30,23 @@
 						<button @click="delete_self">删除</button>
 					</template>
 					<template v-else>
-						<label :style="labelStyle">{{ value_to_show }}</label>
+						<label :style="[labelStyle, hiddenStyle]">{{ value_to_show }}</label>
 					</template>
 				</div>
 			</template>
 			<template v-else>
 				<div class="col-md-12 col-sm-12 text-center data_item_name" style="padding: 0px;">
-					<label style="word-wrap: break-word;
+<!-- 					<label style="word-wrap: break-word;
 								  background-color: #8eb4cb;
 								  color: #fff;
 								  border-radius: .25em;
 								  padding: .2em .6em .3em
-								  font-size: 75%;">{{ name }}</label>
+								  font-size: 75%;">{{ name }}</label> -->
+					<label style="word-wrap: break-word;
+						  background-color: #8eb4cb;
+						  color: #fff;
+						  border-radius: .25em;
+						  padding: 0px .3em 0px">{{ name }}</label>
 				</div>
 			</template>
 		</template>
@@ -60,14 +70,18 @@
 			},
 		},
 		computed: {
-			// data_item_class_object(){
-			// 	var md = 'col-md-' + this.width;
-			// 	var sm = 'col-sm-' + this.width;
-			// 	return {
-			// 		md: true,
-			// 		sm: true,
-			// 	}
-			// },
+			hiddenStyle(){
+				if (('hidden' in this.item)) {
+					return {
+						visibility: 'hidden',
+					};
+				}
+				else{
+					return {
+						visibility: 'visible',
+					};
+				}
+			},
 			md(){
 				return 'col-md-' + this.width;
 			},
