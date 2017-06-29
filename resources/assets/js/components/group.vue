@@ -9,10 +9,11 @@
 			<draggable v-model="innerItems" :options="{ group:name }" @start="drag=false" @end="drag=false">
 				<transition-group name="fade" tag="div">
 					<item v-for="item, key in innerItems" :item='item' :name="item['name']" 
-					:idIndex="item['id_index']" key='item' :editing="editing" @itemDelete.capture="onItemDelete" :index="key"/>
+					:idIndex="item['id_index']" key='item' :editing="editing" @itemDelete.capture="onItemDelete" :index="key" :width="item['width']"/>
 				</transition-group>
 			</draggable>
 		</div>
+		<!-- <button @click="editing = !editing;">{{ button_name }}</button> -->
 	</div>
 </template>
 <script>
