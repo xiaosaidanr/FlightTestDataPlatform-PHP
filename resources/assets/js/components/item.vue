@@ -110,7 +110,7 @@
 							let time_h_24 = 0;
 
 							if (this.idIndex == 'FP_FLI_CTL_COM_SYS_TIME_0' || this.idIndex == 'FP_COLLECTOR_CTL_COM_SYS_TIME_0') {
-								time_h_24 = time_h%24;
+								time_h_24 = time_h;
 							}
 							else{
 								time_h_24 = (time_h + 8)%24;
