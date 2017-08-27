@@ -119,8 +119,16 @@
 							let time_s = time_total_s - time_h * 3600 - time_m * 60;
 							tmp = time_h_24 + ':' + time_m + ':' + time_s;
 						}
-						else{
-							tmp = this.realtimeData[this.idIndex]['ResultStr'] + this.realtimeData[this.idIndex]['Unit'];
+						else {
+							if (this.idIndex == 'FP_GNSS_GPS_LON_0' || this.idIndex == 'FP_GNSS_GPS_LAT_0' || this.idIndex == 'FP_BIG_DIPPER_LON_0' || this.idIndex == 'FP_BIG_DIPPER_LON_1' || this.idIndex == 'FP_BIG_DIPPER_LAT_0' || this.idIndex == 'FP_BIG_DIPPER_LAT_1') 
+							{
+								let float_data = parseFloat(this.realtimeData[this.idIndex]['ResultStr']);
+								let str_data = float_data.toFixed(3);
+								tmp = str_data + this.realtimeData[this.idIndex]['Unit'];
+							}
+							else{
+								tmp = this.realtimeData[this.idIndex]['ResultStr'] + this.realtimeData[this.idIndex]['Unit'];
+							}
 						}
 					}
 					if (('min' in this.item)&&('max' in this.item)) {
