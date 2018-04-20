@@ -13,7 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\RedisSubscribe::class
+        Commands\RedisSubscribe::class,
+        Commands\GetProtocol::class,
+        Commands\ProcessProtocol::class
     ];
 
     /**
