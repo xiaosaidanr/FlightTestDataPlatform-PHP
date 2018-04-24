@@ -36,13 +36,15 @@ class RealtimeDataController extends Controller
 				];
 			}
 			else{
-				$tmp = Redis::hmget($key, ['ResultDouble', 'ResultStr', 'Unit', 'Time']);
+				$tmp = Redis::hmget($key, ['ResultDouble', 'ResultStr', 'Unit', 'Time', 'Max', 'Min']);
 				$realtimeData[$key] = [
 					'ResultDouble'=>$tmp[0],
 					'ResultStr'=>$tmp[1],
 					'Unit'=>$tmp[2],
 					'Time'=>$tmp[3],
-				];		
+					'Max'=>$tmp[4],
+					'Min'=>$tmp[5],
+				];
 			}
 
 		}

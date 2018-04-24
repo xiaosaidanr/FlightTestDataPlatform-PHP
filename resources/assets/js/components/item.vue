@@ -120,7 +120,7 @@
 							tmp = time_h_24 + ':' + time_m + ':' + time_s;
 						}
 						else {
-							if (this.idIndex == 'FP_GNSS_GPS_LON_0' || this.idIndex == 'FP_GNSS_GPS_LAT_0' || this.idIndex == 'FP_BIG_DIPPER_LON_0' || this.idIndex == 'FP_BIG_DIPPER_LON_1' || this.idIndex == 'FP_BIG_DIPPER_LAT_0' || this.idIndex == 'FP_BIG_DIPPER_LAT_1') 
+							if (this.idIndex == 'FP_GNSS_GPS_LON_0' || this.idIndex == 'FP_GNSS_GPS_LAT_0' || this.idIndex == 'FP_BIG_DIPPER_LON_0' || this.idIndex == 'FP_BIG_DIPPER_LON_1' || this.idIndex == 'FP_BIG_DIPPER_LAT_0' || this.idIndex == 'FP_BIG_DIPPER_LAT_1')
 							{
 								let float_data = parseFloat(this.realtimeData[this.idIndex]['ResultStr']);
 								let str_data = float_data.toFixed(3);
@@ -131,7 +131,8 @@
 							}
 						}
 					}
-					if (('min' in this.item)&&('max' in this.item)) {
+					// if (('min' in this.item)&&('max' in this.item)) {
+					if ((this.realtimeData[this.idIndex]['Max'])&&(this.realtimeData[this.idIndex]['Min'])) {
 						let min = this.item['min'];
 						let max = this.item['max'];
 						let amplifier = 1.0;
