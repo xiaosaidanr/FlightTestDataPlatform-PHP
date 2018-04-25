@@ -45,7 +45,7 @@
 
                     <div v-if=""class="collapse navbar-collapse" id="app-navbar-collapse">
                         <!-- Left Side Of Navbar -->
-                        @if (!Auth::guest())
+                        @if (Auth::guest())
                         <ul class="nav navbar-nav">
                             <li>
                                 <router-link to="/custom_data">定制数据</router-link>
@@ -55,7 +55,7 @@
                             </li>
                             <li>
                                 <router-link to="/chart">数据曲线</router-link>
-                            </li>                            
+                            </li>
 <!--                             <li>
                                 <router-link to="/config">数据配置</router-link>
                             </li>
@@ -69,11 +69,10 @@
                         @endif
 
                         <!-- Right Side Of Navbar -->
-                        <ul class="nav navbar-nav navbar-right">
-                            <!-- Authentication Links -->
+                        <!-- <ul class="nav navbar-nav navbar-right">
                             @if (Auth::guest())
                             <li><a href="{{ url('/login') }}">登录</a></li>
-<!--                             <li><a href="{{ url('/register') }}">注册</a></li> -->
+                            <li><a href="{{ url('/register') }}">注册</a></li>
                             @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -94,14 +93,14 @@
                                 </ul>
                             </li>
                             @endif
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
             </nav>
         </div>
         <div class="container">
             @yield('content')
-            @if (!Auth::guest())
+            @if (Auth::guest())
             <!-- <router-view name="header"></router-view> -->
             <div>
                 <router-view ></router-view>
