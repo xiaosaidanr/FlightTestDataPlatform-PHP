@@ -1,17 +1,20 @@
 <template>
-	<div class="data_group">
+	<div class="data_group" v-bind:style="styleObject">
 		<div class="panel panel-default panel-primary" style="margin-bottom: 0px;">
 			<div class="panel-heading" style="background-color:;border-color:;">
 				<h3 class="panel-title">{{ name }}</h3>
 			</div>
 		</div>
 		<div class="panel-body col-md-12 col-sm-12 data_group_value" style="padding: name0px;">
-			<draggable v-model="innerItems" :options="{ group:name }" @start="drag=false" @end="drag=false">
+		<!-- <div class="col-md-12 col-sm-12"> -->
+			<!-- <draggable v-model="innerItems" :options="{ group:name }" @start="drag=false" @end="drag=false">
 				<transition-group name="fade" tag="div">
-					<item v-for="item, key in innerItems" :item='item' :name="item['name']" 
-					:idIndex="item['id_index']" key='item' :editing="editing" @itemDelete.capture="onItemDelete" :index="key" :width="item['width']"/>
+					<item v-for="item, key in innerItems" :item='item' :name="item['name']"
+					:idIndex="item['id_index']" :key='key' :editing="editing" @itemDelete.capture="onItemDelete" :index="key" :width="item['width']"/>
 				</transition-group>
-			</draggable>
+			</draggable> -->
+			<item v-for="item, key in innerItems" :item='item' :name="item['name']"
+			:idIndex="item['id_index']" :key='key' :editing="editing" @itemDelete.capture="onItemDelete" :index="key" :width="item['width']"/>
 		</div>
 		<!-- <button @click="editing = !editing;">{{ button_name }}</button> -->
 	</div>
@@ -20,7 +23,7 @@
 	import draggable from 'vuedraggable'
 	import item from '../components/item.vue'
 	export default{
-		props: ['items', 'index', 'name'],
+		props: ['items', 'index', 'name', 'width'],
 		data: function(){
 			return {
 				innerItems: this.items,
@@ -35,6 +38,12 @@
 			button_name() {
 				return (this.editing==false)?"编辑":"取消";
 			},
+			styleObject(){
+				return {
+					width: this.width + 'px',
+					// height: this.height + 'px',
+				}
+			}
 		},
 		methods: {
 			onItemDelete(index_str) {

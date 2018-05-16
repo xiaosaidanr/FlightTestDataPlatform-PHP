@@ -30,6 +30,7 @@ class TestController extends Controller
         //     return compact("option");
         // }
         $json_string = file_get_contents($root_path.'default.json');
+        // $json_string = file_get_contents($root_path.'default_backup.json');
         $option = json_decode($json_string, true);
         return compact("option");
     }
@@ -39,6 +40,7 @@ class TestController extends Controller
         $root_path = storage_path().'/app/';
         // $file_name = (string)($user->id).'_rawDataConfig.json';
         $file_name = 'default.json';
+        // $file_name = 'default_backup.json';
         // echo $file_name;
         $file_directory = $root_path.$file_name;
         // echo $file_directory;

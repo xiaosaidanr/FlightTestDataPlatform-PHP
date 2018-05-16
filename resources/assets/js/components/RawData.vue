@@ -7,8 +7,8 @@
                 </li>
             </ul>
         </div>
-        <label><input type = "checkbox" v-model="draggable">解锁页面</label>
-        <button class="btn btn-primary" @click="saveConfig" style="float: right">保存页面配置</button>
+        <!-- <label><input type = "checkbox" v-model="draggable">解锁页面</label>
+        <button class="btn btn-primary" @click="saveConfig" style="float: right">保存页面配置</button> -->
         <div class="tab-content">
             <div v-for="frame, index in option['children']" :class="'tab-pane '+((index==0)?'active':'')" :id="frame['id_index']">
                 <page :groups="frame" :index="index" :draggable="draggable" @innerPageChanged.capture="onInnerPageChanged" @layoutChanged.capture="onLayoutChanged"></page>

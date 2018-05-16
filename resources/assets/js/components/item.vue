@@ -1,7 +1,8 @@
 <template>
-	<div class="data_item" v-bind:class="[md, sm]" style="padding: 0px;">
+	<div class="data_item" v-bind:class="[lg, md, sm, xs]" style="padding: 0px;">
+	<!-- <div class="data_item" style="padding: 0px;"> -->
 		<template v-if="name!=''&&idIndex!=''">
-			<div class="col-md-7 col-sm-6 text-center data_item_name" style="padding: 0px;">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center data_item_name" style="padding: 0px;">
 <!-- 				<label style="word-wrap: break-word;
 							  background-color: #8eb4cb;
 							  color: #fff;
@@ -14,7 +15,7 @@
 						  border-radius: .25em;
 						  padding: 0px .3em 0px">{{ name }}</label>
 			</div>
-			<div class="col-md-5 col-sm-6 text-center data_item_value" style="padding: 0px;">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center data_item_value" style="padding: 0px;">
 				<template v-if="editing">
 					<button @click="delete_self">删除</button>
 				</template>
@@ -82,11 +83,17 @@
 					};
 				}
 			},
+			lg(){
+				return 'col-lg-' + this.width;
+			},
 			md(){
 				return 'col-md-' + this.width;
 			},
 			sm(){
 				return 'col-sm-' + this.width;
+			},
+			xs(){
+				return 'col-xs-' + this.width;
 			},
 			value_to_show(){
 				if (this.idIndex!='') {

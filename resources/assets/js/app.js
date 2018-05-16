@@ -20,6 +20,7 @@ import Vuex from 'vuex'
 import routes from './routes'
 // import AMap from 'vue-amap';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import {VueMasonryPlugin} from 'vue-masonry'
 
 
 highcharts.setOptions({
@@ -33,6 +34,7 @@ highcharts.setOptions({
 Vue.use(VueHighcharts);
 Vue.use(VueRouter);
 Vue.use(Vuex);
+Vue.use(VueMasonryPlugin);
 
 const store = new Vuex.Store({
     state: {
