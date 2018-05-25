@@ -1,8 +1,8 @@
 <template>
-	<div class="data_item" v-bind:class="[lg, md, sm, xs]" style="padding: 0px;">
+	<div class="data_item text-center" v-bind:class="[lg, md, sm, xs]" style="padding: 0px;">
 	<!-- <div class="data_item" style="padding: 0px;"> -->
 		<template v-if="name!=''&&idIndex!=''">
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center data_item_name" style="padding: 0px;">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center data_item_name" style="padding: 0px;display: flex;flex-direction: column;">
 <!-- 				<label style="word-wrap: break-word;
 							  background-color: #8eb4cb;
 							  color: #fff;
@@ -15,7 +15,7 @@
 						  border-radius: .25em;
 						  padding: 0px .3em 0px">{{ name }}</label>
 			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center data_item_value" style="padding: 0px;">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center data_item_value" style="padding: 0px;display: flex;flex-direction: column;">
 				<template v-if="editing">
 					<button @click="delete_self">删除</button>
 				</template>
@@ -26,29 +26,34 @@
 		</template>
 		<template v-else>
 			<template v-if="name==''">
-				<div class="col-md-12 col-sm-12 text-center data_item_value" style="padding: 0px;">
+				<!-- <div class="col-md-12 col-sm-12 text-center data_item_value" style="padding: 0px;">
 					<template v-if="editing">
 						<button @click="delete_self">删除</button>
 					</template>
 					<template v-else>
 						<label :style="[labelStyle, hiddenStyle]">{{ value_to_show }}</label>
 					</template>
-				</div>
+				</div> -->
+				<template v-if="editing">
+					<button @click="delete_self">删除</button>
+				</template>
+				<template v-else>
+					<label :style="[labelStyle, hiddenStyle]">{{ value_to_show }}</label>
+				</template>
 			</template>
 			<template v-else>
-				<div class="col-md-12 col-sm-12 text-center data_item_name" style="padding: 0px;">
-<!-- 					<label style="word-wrap: break-word;
-								  background-color: #8eb4cb;
-								  color: #fff;
-								  border-radius: .25em;
-								  padding: .2em .6em .3em
-								  font-size: 75%;">{{ name }}</label> -->
+				<!-- <div class="col-md-12 col-sm-12 text-center data_item_name" style="padding: 0px;">
 					<label style="word-wrap: break-word;
 						  background-color: #8eb4cb;
 						  color: #fff;
 						  border-radius: .25em;
 						  padding: 0px .3em 0px">{{ name }}</label>
-				</div>
+				</div> -->
+				<label style="word-wrap: break-word;
+					  background-color: #8eb4cb;
+					  color: #fff;
+					  border-radius: .25em;
+					  padding: 0px .3em 0px">{{ name }}</label>
 			</template>
 		</template>
 	</div>
@@ -96,7 +101,10 @@
 				return 'col-xs-' + this.width;
 			},
 			value_to_show(){
-				if (this.idIndex!='') {
+				if (this.idIndex == "") {
+					return '0';
+				}
+				else{
 					let tmp = '';
 					if (Array.isArray(this.idIndex)) {
 						for (let i = 0; i < this.idIndex.length; i++) {
@@ -137,29 +145,28 @@
 								tmp = this.realtimeData[this.idIndex]['ResultStr'] + this.realtimeData[this.idIndex]['Unit'];
 							}
 						}
-					}
-					// if (('min' in this.item)&&('max' in this.item)) {
-					if ((this.realtimeData[this.idIndex]['Max'])&&(this.realtimeData[this.idIndex]['Min'])) {
-						let min = this.item['min'];
-						let max = this.item['max'];
-						let amplifier = 1.0;
-						if ( (min == '-1.5707963' || min == '-3.1415926' || min == '-6.2831852') || (max == '1.5707963' || max == '3.1415926' || max == '6.2831852') ) {
-							amplifier = 180/3.1415926;
-						}
-						min = parseFloat(min) * amplifier;
-						max = parseFloat(max) * amplifier;
-						let resultDouble = parseFloat(this.realtimeData[this.idIndex]['ResultDouble']);
-						if ( min>resultDouble||max<resultDouble ) {
-							this.labelStyle['color'] = 'red';
-						}
-						else{
-							this.labelStyle['color'] = '';
+						// if (('min' in this.item)&&('max' in this.item)) {
+						if ((this.realtimeData[this.idIndex]['Max'])&&(this.realtimeData[this.idIndex]['Min'])) {
+							// let min = this.item['min'];
+							// let max = this.item['max'];
+							let min = this.realtimeData[this.idIndex]['Min'];
+							let max = this.realtimeData[this.idIndex]['Max'];
+							let amplifier = 1.0;
+							if ( (min == '-1.5707963' || min == '-3.1415926' || min == '-6.2831852') || (max == '1.5707963' || max == '3.1415926' || max == '6.2831852') ) {
+								amplifier = 180/3.1415926;
+							}
+							min = parseFloat(min) * amplifier;
+							max = parseFloat(max) * amplifier;
+							let resultDouble = parseFloat(this.realtimeData[this.idIndex]['ResultDouble']);
+							if ( min>resultDouble||max<resultDouble ) {
+								this.labelStyle['color'] = 'red';
+							}
+							else{
+								this.labelStyle['color'] = '';
+							}
 						}
 					}
 					return tmp;
-				}
-				else{
-					return '0';
 				}
 			},
 			...mapState({

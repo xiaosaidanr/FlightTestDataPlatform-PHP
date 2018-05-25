@@ -5,7 +5,7 @@
 				<h3 class="panel-title">{{ name }}</h3>
 			</div>
 		</div>
-		<div class="panel-body col-md-12 col-sm-12 data_group_value" style="padding: name0px;">
+		<div class="panel-body col-md-12 col-sm-12 data_group_value" style="padding: name0px;display: flex;flex-wrap: wrap;">
 		<!-- <div class="col-md-12 col-sm-12"> -->
 			<!-- <draggable v-model="innerItems" :options="{ group:name }" @start="drag=false" @end="drag=false">
 				<transition-group name="fade" tag="div">
