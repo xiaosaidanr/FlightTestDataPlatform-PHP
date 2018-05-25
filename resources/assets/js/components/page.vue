@@ -1,5 +1,5 @@
 <template>
-	<div class="data_page">
+	<div class="data_page" v-if="is_show">
 		<!-- <grid-layout
 			:layout="innerGroups['layout']"
 			:col-num="12"
@@ -42,7 +42,7 @@
 	// var GridLayout = VueGridLayout.GridLayout;
 	// var GridItem = VueGridLayout.GridItem;
 	export default{
-		props: ['groups', 'index', 'draggable'],
+		props: ['groups', 'index', 'draggable', 'name', 'current'],
 		components: {
 			// GridLayout,
 			// GridItem,
@@ -52,6 +52,7 @@
 			return {
 				// innerGroups: this.groups,
 				// innerLayout: this.groups['layout'],
+				is_show: true,
 			}
 		},
 		methods: {
@@ -76,6 +77,18 @@
 			// },
 		},
 		watch: {
+			current(value){
+				if (value == this.name) {
+					this.is_show = false;
+					var self = this;
+					Vue.nextTick(function(){
+						self.is_show = true;
+					})
+					// console.log(this.name)
+					// this.$redrawVueMasonry();
+					// console.log('after');
+				}
+			}
 			// groups(val) {
 			// 	this.innerGroups = val;
 			// },
