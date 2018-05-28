@@ -33,7 +33,7 @@ var defaultOption = {
             }
 	},
 	legend: {
-		enable: true
+		enabled: false
 	},
 	exporting: {
 		enable: true

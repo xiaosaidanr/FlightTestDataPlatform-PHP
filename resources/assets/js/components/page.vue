@@ -29,7 +29,7 @@
 		>
 			<div id="test" style="width: 220px"/>
 			<div v-masonry-tile class="item" v-for="(group, index) in groups['children']">
-				<group :name="group['name']" :index="index" :items="group['children']" :width="group['width']"/>
+				<group :name="group['label']" :index="index" :items="group['children']" :width="group['width']"/>
 			</div>
 		</div>
 </div>

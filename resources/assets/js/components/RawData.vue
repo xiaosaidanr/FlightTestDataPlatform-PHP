@@ -3,7 +3,7 @@
         <div class="menu">
             <ul class="nav nav-tabs">
                 <li v-for="frame, index in option['children']" :class="(index==0)?'active':''" v-on:click="OnTabChange(frame['id_index'])">
-                    <a :href="'#'+frame['id_index']" data-toggle="tab">{{ frame['name'] }}</a>
+                    <a :href="'#'+frame['id_index']" data-toggle="tab">{{ frame['label'] }}</a>
                 </li>
             </ul>
         </div>
@@ -19,15 +19,17 @@
 <script>
     import page from '../components/page.vue'
     var sssss = require('jquery');
-    sssss(window).scroll(function(){
-        var menu_top = $('#menu_wrap').offset().top;
-        if (sssss(window).scrollTop()>=menu_top) {
-            sssss('.menu').addClass('menuFixed');
-        }
-        else{
-            sssss('.menu').removeClass('menuFixed');
-        }
-    })
+	sssss(window).scroll(function(){
+		if (typeof($('#menu_wrap').offset()) != 'undefined') {
+			var menu_top = $('#menu_wrap').offset().top;
+			if (sssss(window).scrollTop()>=menu_top) {
+				sssss('.menu').addClass('menuFixed');
+			}
+			else{
+				sssss('.menu').removeClass('menuFixed');
+			}
+		}
+	})
 	export default{
 		data: function(){
 			return {

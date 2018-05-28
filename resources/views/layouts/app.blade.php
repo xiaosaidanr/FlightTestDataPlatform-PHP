@@ -47,9 +47,9 @@
                         <!-- Left Side Of Navbar -->
                         @if (Auth::guest())
                         <ul class="nav navbar-nav">
-                            <li>
+                            <!-- <li>
                                 <router-link to="/custom_data">定制数据</router-link>
-                            </li>
+                            </li> -->
                             <li>
                                 <router-link to="/raw_data">遥测数据</router-link>
                             </li>

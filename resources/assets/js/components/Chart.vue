@@ -1,5 +1,76 @@
 <template>
-	<div :id='test'>
+<div>
+    <off-canvas v-model="show" :width="300" :duration=".5" effect="ease-in-out" @sidebarWasClosed="onSidebarWasClosed">
+        <tree-select
+            placeholder="搜索..."
+            v-model="valueSelected"
+            valueFormat="object"
+            :multiple="true"
+            :options="options"
+            :always-open="true"
+            value-consists-of="LEAF_PRIORITY"
+            :disable-branch-nodes="true"
+             search-nested
+        />
+    </off-canvas>
+    <div>
+        <button class="btn btn-primary" @click="confirm" v-if="show">{{ buttonName }}</button>
+        <button class="btn btn-primary" @click="addNewChart" v-if="!show">{{ buttonName }}</button>
+    </div>
+    <chart-item v-for="chartItem, index in chartItems"
+        :index="index"
+        :chartItem="chartItem"
+    />
+</div>
+</template>
+<script>
+import offCanvas from 'vue-offcanvas-simple/src/SidebarOffCanvas.vue'
+import Treeselect from '@riophae/vue-treeselect'
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+import ChartItem from '../components/ChartItem.vue'
+export default {
+    data: function() {
+        return {
+            buttonName: '添加数据',
+            show: false,
+            valueSelected: null,
+            options: [],
+            chartItems: [],
+        }
+    },
+    components: {
+        'off-canvas': offCanvas,
+        'tree-select': Treeselect,
+        'chart-item': ChartItem,
+    },
+    methods: {
+        addNewChart(){
+            this.show = true;
+            this.buttonName = '确定';
+        },
+        confirm(){
+            if (this.show) {
+                // console.log('here');
+                this.show = false;
+                this.buttonName = '添加数据';
+                this.chartItems = _.cloneDeep(this.valueSelected);
+            }
+        },
+        onSidebarWasClosed(){
+            this.confirm();
+        },
+    },
+    created: function () {
+        var self = this;
+        $.when(this.$http.get('/chart_config')).then(function (res) {
+            self.options = res.body.option;
+        });
+    }
+}
+</script>
+
+<!-- <template>
+	<div :class='test'>
 		<div class="panel panel-default panel-primary">
 			<div class="panel-heading">
 				<h3 class="panel-title">
@@ -26,7 +97,7 @@
 				<highcharts :options='chartOption_fuyangjiaobei' ref="chart_fuyangjiaobei"></highcharts>
 			</div>
 		</div>
-	</div> 
+	</div>
 </template>
 <script>
 	import defaultOptions from '../chartOptions';
@@ -41,7 +112,7 @@
 			}
 		},
 		methods: {
-			
+
 		},
 		created: function(){
 			this.chartOption_main.series[0].name = '航向角-主';
@@ -116,7 +187,7 @@
 					console.log(e);
 					return 0;
 				}
-				
+
 			},
 			...mapState({
 				realtimeData: state => state.realtimeData,
@@ -124,4 +195,4 @@
 			})
 		}
 	}
-</script>
+</script> -->

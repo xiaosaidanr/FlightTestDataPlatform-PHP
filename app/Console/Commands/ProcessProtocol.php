@@ -83,7 +83,7 @@ class ProcessProtocol extends Command
                                 $id_index_collection[$subparam->getElementsByTagName('ID')[0]->nodeValue.'_'.$subparam->getElementsByTagName('index')[0]->nodeValue] = '0';
                                 $subparam_dict = [
                                   'name'=>$subparam->getElementsByTagName('name')[0]->nodeValue,
-                                  'id'=>$subparam->getElementsByTagName('ID')[0]->nodeValue.'_'.$subparam->getElementsByTagName('index')[0]->nodeValue,
+                                  'id_index'=>$subparam->getElementsByTagName('ID')[0]->nodeValue.'_'.$subparam->getElementsByTagName('index')[0]->nodeValue,
                                 ];
                                 if ($subparam->getElementsByTagName('minValue')[0]->nodeValue != '' && $subparam->getElementsByTagName('maxValue')[0]->nodeValue != '') {
                                     $subparam_dict['min'] = $subparam->getElementsByTagName('minValue')[0]->nodeValue;
@@ -102,5 +102,96 @@ class ProcessProtocol extends Command
         $this->info('生成id_index_collection.json!');
         file_put_contents(storage_path().'/app/option.json', json_encode($option, JSON_UNESCAPED_UNICODE));
         $this->info('生成option.json!');
+        // $this->add_id();
+        $this->generate_4_chart();
+    }
+
+    private function add_id()
+    {
+        $json_string = file_get_contents(storage_path().'/app/default.json');
+        $data = json_decode($json_string, true);
+        $data['id'] = 'root';
+        for ($i=0; $i < count($data['children']); $i++) {
+            # code...
+            $data['children'][$i]['id'] = (string)$i;
+            for ($j=0; $j < count($data['children'][$i]['children']); $j++) {
+                # code...
+                $data['children'][$i]['children'][$j]['id'] = $i.'_'.$j;
+                for ($k=0; $k < count($data['children'][$i]['children'][$j]['children']); $k++) {
+                    # code...
+                    $data['children'][$i]['children'][$j]['children'][$k]['id'] = $i.'_'.$j.'_'.$k;
+                }
+            }
+        }
+        $json_string = json_encode($data);
+        file_put_contents(storage_path().'/app/default.json', $json_string);
+        $this->info('生成default.json!');
+    }
+
+    private function generate_4_chart(){
+        $dsc_protocol_path = storage_path().'/app/DSC_Protocol.xml';
+        $dsc_doc = new \DOMDocument();
+        $dsc_doc->load($dsc_protocol_path);
+        $root = $dsc_doc->documentElement;
+        $tmframe_list = $root->getElementsByTagName('TMFrame');
+        $chart_config = [];
+        foreach ($tmframe_list as $tmframe) {
+            $tmframe_dict = [
+              'id'=>$tmframe->getElementsByTagName('ID')[0]->nodeValue.'_'.$tmframe->getElementsByTagName('index')[0]->nodeValue,
+              'label'=>$tmframe->getElementsByTagName('name')[0]->nodeValue,
+              'id_index'=>$tmframe->getElementsByTagName('ID')[0]->nodeValue.'_'.$tmframe->getElementsByTagName('index')[0]->nodeValue,
+              'children'=>[],
+            ];
+            $param_list = array();
+            foreach ($tmframe->childNodes as $tmframe_child) {
+                if ($tmframe_child->nodeName == 'Param') {
+                    array_push($param_list, $tmframe_child);
+                }
+            }
+            foreach ($param_list as $param) {
+                $name = $param->getElementsByTagName('name')[0]->nodeValue;
+                $EnumTypeID = $param->getElementsByTagName('EnumTypeID')[0]->nodeValue;
+                if ($name != '备用' && $name != '校验和' && $EnumTypeID == '') {
+                    $param_dict = [
+                      'id'=>$param->getElementsByTagName('ID')[0]->nodeValue.'_'.$param->getElementsByTagName('index')[0]->nodeValue,
+                      'label'=>$param->getElementsByTagName('name')[0]->nodeValue,
+                      'id_index'=>$param->getElementsByTagName('ID')[0]->nodeValue.'_'.$param->getElementsByTagName('index')[0]->nodeValue,
+                    ];
+                    $subparam_list = $param->getElementsByTagName('Param');
+                    if ($subparam_list->length != 0) {
+                        $param_dict['children'] = [];
+                        foreach ($subparam_list as $subparam) {
+                            $name = $subparam->getElementsByTagName('name')[0]->nodeValue;
+                            $EnumTypeID = $subparam->getElementsByTagName('EnumTypeID')[0]->nodeValue;
+                            if ($name != '备用' && $name != '校验和' && $EnumTypeID == '') {
+                                $subparam_dict = [
+                                  'id'=>$subparam->getElementsByTagName('ID')[0]->nodeValue.'_'.$subparam->getElementsByTagName('index')[0]->nodeValue,
+                                  'label'=>$subparam->getElementsByTagName('name')[0]->nodeValue,
+                                  'id_index'=>$subparam->getElementsByTagName('ID')[0]->nodeValue.'_'.$subparam->getElementsByTagName('index')[0]->nodeValue,
+                                ];
+                                array_push($param_dict['children'], $subparam_dict);
+                            }
+                        }
+                    }
+                    if (isset($param_dict['children'])) {
+                        # code...
+                        if (count($param_dict['children']) > 0) {
+                            # code...
+                            array_push($tmframe_dict['children'], $param_dict);
+                        }
+                    }
+                    else {
+                        # code...
+                        array_push($tmframe_dict['children'], $param_dict);
+                    }
+                }
+            }
+            if (count($tmframe_dict['children']) > 0) {
+                # code...
+                array_push($chart_config, $tmframe_dict);
+            }
+        }
+        file_put_contents(storage_path().'/app/chart_config.json', json_encode($chart_config, JSON_UNESCAPED_UNICODE));
+        $this->info('生成chart_config.json!');
     }
 }

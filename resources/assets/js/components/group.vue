@@ -13,7 +13,7 @@
 					:idIndex="item['id_index']" :key='key' :editing="editing" @itemDelete.capture="onItemDelete" :index="key" :width="item['width']"/>
 				</transition-group>
 			</draggable> -->
-			<item v-for="item, key in innerItems" :item='item' :name="item['name']"
+			<item v-for="item, key in innerItems" :item='item' :name="item['label']"
 			:idIndex="item['id_index']" :key='key' :editing="editing" @itemDelete.capture="onItemDelete" :index="key" :width="item['width']"/>
 		</div>
 		<!-- <button @click="editing = !editing;">{{ button_name }}</button> -->

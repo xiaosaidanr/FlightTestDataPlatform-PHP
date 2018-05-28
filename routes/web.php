@@ -22,3 +22,5 @@ Route::get('/', 'HomeController@index');
 Route::resource('option', 'TestController', ['only' => ['index', 'store']]);
 
 Route::resource('realtime_data', 'RealtimeDataController', ['only' => ['index']]);
+
+Route::resource('chart_config', 'ChartDataController', ['only' => ['index']]);
