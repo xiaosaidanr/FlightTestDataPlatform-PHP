@@ -113,7 +113,8 @@
     </div>
 
     <!-- Scripts -->
-    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.0.0/masonry.pkgd.min.js"></script>
+    <!-- <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.0.0/masonry.pkgd.min.js"></script> -->
+    <script async defer src="js/masonry.pkgd.min.js"></script>
     <script src="{{ elixir('js/app.js') }}"></script>
     <div class="alert alert-success" role="alert" ></div>
     <div class="alert alert-warning" role="alert" ></div>
