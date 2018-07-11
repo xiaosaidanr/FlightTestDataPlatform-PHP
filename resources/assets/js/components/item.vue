@@ -124,7 +124,7 @@
 							let time_h = parseInt(time_total_s/3600);
 							let time_h_24 = 0;
 
-							if (this.idIndex == 'FP_FLI_CTL_COM_SYS_TIME_0' || this.idIndex == 'FP_COLLECTOR_CTL_COM_SYS_TIME_0') {
+							if (this.idIndex == 'FP_FLI_CTL_COM_SYS_TIME_0' || this.idIndex == 'FP_FLI_CTL_COM_SYS_TIME_1' || this.idIndex == 'FP_FLI_CTL_COM_SYS_TIME_2') {
 								time_h_24 = time_h;
 							}
 							else{
