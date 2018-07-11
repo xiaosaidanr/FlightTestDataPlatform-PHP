@@ -52,7 +52,7 @@ class ProcessProtocol extends Command
         foreach ($tmframe_list as $tmframe) {
             $tmframe_dict = [
               'name'=>$tmframe->getElementsByTagName('name')[0]->nodeValue,
-              'id_index'=>$tmframe->getElementsByTagName('ID')[0]->nodeValue.'_'.$tmframe->getElementsByTagName('index')[0]->nodeValue,
+              'id_index'=>$tmframe->getElementsByTagName('ID')[0]->nodeValue.'_'.((string)base_convert($tmframe->getElementsByTagName('index')[0]->nodeValue, 16, 10)),
               'children'=>[]
             ];
             $param_list = array();
@@ -69,8 +69,8 @@ class ProcessProtocol extends Command
                     ];
                     $subparam_list = $param->getElementsByTagName('Param');
                     if ($subparam_list->length == 0) {
-                        $id_index_collection[$param->getElementsByTagName('ID')[0]->nodeValue.'_'.$param->getElementsByTagName('index')[0]->nodeValue] = '0';
-                        $param_dict['id_index'] = $param->getElementsByTagName('ID')[0]->nodeValue.'_'.$param->getElementsByTagName('index')[0]->nodeValue;
+                        $id_index_collection[$param->getElementsByTagName('ID')[0]->nodeValue.'_'.((string)base_convert($param->getElementsByTagName('index')[0]->nodeValue, 16, 10))] = '0';
+                        $param_dict['id_index'] = $param->getElementsByTagName('ID')[0]->nodeValue.'_'.((string)base_convert($param->getElementsByTagName('index')[0]->nodeValue, 16, 10));
                         if ($param->getElementsByTagName('minValue')[0]->nodeValue != '' && $param->getElementsByTagName('maxValue')[0]->nodeValue != '') {
                             $param_dict['min'] = $param->getElementsByTagName('minValue')[0]->nodeValue;
                             $param_dict['max'] = $param->getElementsByTagName('maxValue')[0]->nodeValue;
@@ -80,10 +80,10 @@ class ProcessProtocol extends Command
                         foreach ($subparam_list as $subparam) {
                             $name = $subparam->getElementsByTagName('name')[0]->nodeValue;
                             if ($name != '备用' && $name != '校验和') {
-                                $id_index_collection[$subparam->getElementsByTagName('ID')[0]->nodeValue.'_'.$subparam->getElementsByTagName('index')[0]->nodeValue] = '0';
+                                $id_index_collection[$subparam->getElementsByTagName('ID')[0]->nodeValue.'_'.((string)base_convert($subparam->getElementsByTagName('index')[0]->nodeValue, 16, 10))] = '0';
                                 $subparam_dict = [
                                   'name'=>$subparam->getElementsByTagName('name')[0]->nodeValue,
-                                  'id_index'=>$subparam->getElementsByTagName('ID')[0]->nodeValue.'_'.$subparam->getElementsByTagName('index')[0]->nodeValue,
+                                  'id_index'=>$subparam->getElementsByTagName('ID')[0]->nodeValue.'_'.((string)base_convert($subparam->getElementsByTagName('index')[0]->nodeValue, 16, 10)),
                                 ];
                                 if ($subparam->getElementsByTagName('minValue')[0]->nodeValue != '' && $subparam->getElementsByTagName('maxValue')[0]->nodeValue != '') {
                                     $subparam_dict['min'] = $subparam->getElementsByTagName('minValue')[0]->nodeValue;
@@ -137,9 +137,9 @@ class ProcessProtocol extends Command
         $chart_config = [];
         foreach ($tmframe_list as $tmframe) {
             $tmframe_dict = [
-              'id'=>$tmframe->getElementsByTagName('ID')[0]->nodeValue.'_'.$tmframe->getElementsByTagName('index')[0]->nodeValue,
+              'id'=>$tmframe->getElementsByTagName('ID')[0]->nodeValue.'_'.((string)base_convert($tmframe->getElementsByTagName('index')[0]->nodeValue, 16, 10)),
               'label'=>$tmframe->getElementsByTagName('name')[0]->nodeValue,
-              'id_index'=>$tmframe->getElementsByTagName('ID')[0]->nodeValue.'_'.$tmframe->getElementsByTagName('index')[0]->nodeValue,
+              'id_index'=>$tmframe->getElementsByTagName('ID')[0]->nodeValue.'_'.((string)base_convert($tmframe->getElementsByTagName('index')[0]->nodeValue, 16, 10)),
               'children'=>[],
             ];
             $param_list = array();
@@ -153,9 +153,9 @@ class ProcessProtocol extends Command
                 $EnumTypeID = $param->getElementsByTagName('EnumTypeID')[0]->nodeValue;
                 if ($name != '备用' && $name != '校验和' && $EnumTypeID == '') {
                     $param_dict = [
-                      'id'=>$param->getElementsByTagName('ID')[0]->nodeValue.'_'.$param->getElementsByTagName('index')[0]->nodeValue,
+                      'id'=>$param->getElementsByTagName('ID')[0]->nodeValue.'_'.((string)base_convert($param->getElementsByTagName('index')[0]->nodeValue, 16, 10)),
                       'label'=>$param->getElementsByTagName('name')[0]->nodeValue,
-                      'id_index'=>$param->getElementsByTagName('ID')[0]->nodeValue.'_'.$param->getElementsByTagName('index')[0]->nodeValue,
+                      'id_index'=>$param->getElementsByTagName('ID')[0]->nodeValue.'_'.((string)base_convert($param->getElementsByTagName('index')[0]->nodeValue, 16, 10)),
                     ];
                     $subparam_list = $param->getElementsByTagName('Param');
                     if ($subparam_list->length != 0) {
@@ -165,9 +165,9 @@ class ProcessProtocol extends Command
                             $EnumTypeID = $subparam->getElementsByTagName('EnumTypeID')[0]->nodeValue;
                             if ($name != '备用' && $name != '校验和' && $EnumTypeID == '') {
                                 $subparam_dict = [
-                                  'id'=>$subparam->getElementsByTagName('ID')[0]->nodeValue.'_'.$subparam->getElementsByTagName('index')[0]->nodeValue,
+                                  'id'=>$subparam->getElementsByTagName('ID')[0]->nodeValue.'_'.((string)base_convert($subparam->getElementsByTagName('index')[0]->nodeValue, 16, 10)),
                                   'label'=>$subparam->getElementsByTagName('name')[0]->nodeValue,
-                                  'id_index'=>$subparam->getElementsByTagName('ID')[0]->nodeValue.'_'.$subparam->getElementsByTagName('index')[0]->nodeValue,
+                                  'id_index'=>$subparam->getElementsByTagName('ID')[0]->nodeValue.'_'.((string)base_convert($subparam->getElementsByTagName('index')[0]->nodeValue, 16, 10)),
                                 ];
                                 array_push($param_dict['children'], $subparam_dict);
                             }

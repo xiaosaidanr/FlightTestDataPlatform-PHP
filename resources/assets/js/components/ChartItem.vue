@@ -33,7 +33,7 @@ export default {
             try {
                 var data = this.realtimeData[this.chartItem['id_index']];
                 var y = parseFloat(data['ResultStr']);
-                var y = parseInt(data['Time']) * 1000;
+                var x = parseInt(data['Time']) * 1000;
                 if (isNaN(y) || isNaN(y)) {
                     console.log(this.chartItem['label'] + ":" + this.$refs[this.chartItem['id']].chart.series[0].data.length);
                     return 0
