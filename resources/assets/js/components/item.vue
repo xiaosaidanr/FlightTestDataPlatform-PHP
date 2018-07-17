@@ -135,7 +135,11 @@
 							tmp = time_h_24 + ':' + time_m + ':' + time_s;
 						}
 						else {
-							if (this.idIndex == 'FP_GNSS_GPS_LON_0' || this.idIndex == 'FP_GNSS_GPS_LAT_0' || this.idIndex == 'FP_BIG_DIPPER_LON_0' || this.idIndex == 'FP_BIG_DIPPER_LON_1' || this.idIndex == 'FP_BIG_DIPPER_LAT_0' || this.idIndex == 'FP_BIG_DIPPER_LAT_1')
+							// if (this.idIndex == 'FP_GNSS_GPS_LON_0' || this.idIndex == 'FP_GNSS_GPS_LAT_0' || this.idIndex == 'FP_BIG_DIPPER_LON_0' || this.idIndex == 'FP_BIG_DIPPER_LON_1' || this.idIndex == 'FP_BIG_DIPPER_LAT_0' || this.idIndex == 'FP_BIG_DIPPER_LAT_1')
+							if (this.realtimeData[this.idIndex]['Unit'] == '°' || 
+								this.realtimeData[this.idIndex]['Unit'] == '°N' || 
+								this.realtimeData[this.idIndex]['Unit'] == '°E' ||
+								this.realtimeData[this.idIndex]['Unit'] == '°/s') 
 							{
 								let float_data = parseFloat(this.realtimeData[this.idIndex]['ResultStr']);
 								let str_data = float_data.toFixed(3);
