@@ -29,7 +29,7 @@ var defaultOption = {
 		formatter: function(){
               return '<b>' + this.series.name + '</b><br/>' +
               highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-              highcharts.numberFormat(this.y, 2) + ' ' + '°';
+              highcharts.numberFormat(this.y, 2);
             }
 	},
 	legend: {
