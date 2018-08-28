@@ -23,6 +23,7 @@ export default {
     data: function() {
         return {
             chartOption: _.cloneDeep(defaultOptions['default']),
+            saved_id_index: '',
         }
     },
     methods: {
@@ -50,6 +51,11 @@ export default {
 
                         }
                     }
+                }
+                if (this.saved_id_index != this.chartItem['id_index']) {
+                    this.saved_id_index = this.chartItem['id_index'];
+                    this.$refs[this.chartItem['id']].chart.series[0].remove();
+                    this.$refs[this.chartItem['id']].chart.addSeries({data:[]});
                 }
                 return 0;
             } catch (e) {
